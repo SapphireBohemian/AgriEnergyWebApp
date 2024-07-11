@@ -1,0 +1,40 @@
+﻿@model IEnumerable<AgriEnergyWebApp.Models.Farmer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <h1>Farmers</h1>
+
+    <div class="row mb-3">
+        <div class="col">
+            <a asp-action="Register" class="btn btn-primary">Add New Farmer</a>
+        </div>
+        <div class="col text-right">
+            <a asp-controller="Home" asp-action="Emp" class="btn btn-secondary">Main Menu</a>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Farmer ID</th>
+                <th>Farmer Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.FarmerId)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FarmerName)</td>
+                    <td>
+                        <a asp-action="Products" asp-route-id="@item.FarmerId" class="btn btn-info">View Products</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

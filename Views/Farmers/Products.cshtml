@@ -1,0 +1,68 @@
+﻿@model IEnumerable<AgriEnergyWebApp.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <h1>Products</h1>
+    <div class="mb-3">
+        <a asp-action="Index" class="btn btn-secondary">Back to Farmers</a>
+    </div>
+
+    <form asp-controller="Farmers" asp-action="Products">
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <input type="submit" value="Show All Products" class="btn btn-primary" />
+            </div>
+        </div>
+    </form>
+
+    <form asp-controller="Farmers" asp-action="Products" class="mb-3">
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <input type="submit" value="Filter" class="btn btn-primary" />
+            </div>
+            <div class="col-auto">
+                <label for="SearchString">Product Type:</label>
+                <input type="text" name="SearchString" class="form-control" />
+            </div>
+            <div class="col-auto">
+                <label for="fromDate">From:</label>
+                <input type="date" name="fromDate" class="form-control" />
+            </div>
+            <div class="col-auto">
+                <label for="toDate">To:</label>
+                <input type="date" name="toDate" class="form-control" />
+            </div>
+        </div>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Product Price</th>
+                <th>Product Quantity</th>
+                <th>Product Type</th>
+                <th>Date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                    <td>R @Html.DisplayFor(modelItem => item.ProductPrice).00</td>
+                    <td>@Html.DisplayFor(modelItem => item.ProductQuantity)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ProductType)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ProductDate)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ProductId" class="btn btn-info">Update</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
